@@ -1,0 +1,22 @@
+{
+    "name": "mlab/filemanipulation",
+    "description": "Php image manipulation library",
+    "type": "library",
+    "minimum-stability": "dev",
+    "version": "0.1",
+    "autoload": {
+        "psr-4": {
+            "MLAB\\FileManipulation\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marco De Felice",
+            "email": "marco.defelice890@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.8.1",
+        "psr/log": "^3.0"
+    }
+}
