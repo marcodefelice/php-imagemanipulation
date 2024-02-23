@@ -26,7 +26,7 @@ composer require mlab/filemanipulation
 ## Usage
 Here's a basic example of how to use your package:
 
-``
+```
 <?php
 use MLAB\FileManipulation\Model\Image;
 use MLAB\FileManipulation\Model\FileInterface;
@@ -49,9 +49,7 @@ $files = $request->getUploadedFiles();
         }
 
     }
-
-
-``
+```
 
 
 ### Contributions
