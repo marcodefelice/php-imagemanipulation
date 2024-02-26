@@ -9,23 +9,32 @@ namespace MLAB\FileManipulation\Model;
 
  use MLAB\FileManipulation\Exceptions\ValueError;
 
-enum MimeType: string {
+class MimeType {
 
-    case jpeg = 'image/jpeg';
-    case pjpeg = 'image/pjpeg';
-    case png = 'image/png';
-    case giff = 'image/giff';
-    case tiff = 'image/tiff';
-    case webp = 'image/webp';
-    case bmp = 'image/bmp';
-    case svg = 'image/svg';
+    public string $value;
+
+    const cases = [
+        "jpeg" => 'image/jpeg',
+        "pjpeg" => 'image/pjpeg',
+        "png" => 'image/png',
+        "giff" => 'image/giff',
+        "tiff" => 'image/tiff',
+        "webp" => 'image/webp',
+        "bmp" => 'image/bmp',
+        "svg" => 'image/svg',
+    ];
+
+    private function __construct(string $value)
+    {
+        $this->value = $value;
+    }
 
 
     public static function fromName(string $name): MimeType
     {
-        foreach (self::cases() as $status) {
+        foreach (self::cases as $status) {
             if( $name === $status->name ){
-                return $status;
+                return new MimeType($status);
             }
         }
 
@@ -34,9 +43,9 @@ enum MimeType: string {
 
     public static function fromValues(string $value): MimeType
     {
-        foreach (self::cases() as $status) {
-            if($status->value == $value) {
-                return $status;
+        foreach (self::cases as $status) {
+            if($status == $value) {
+                return new MimeType($status);
             }
         }
 
@@ -47,7 +56,7 @@ enum MimeType: string {
     public static function values(): array
     {
         $results = [];
-        foreach (self::cases() as $status) {
+        foreach (self::cases as $status) {
             $results[] = $status->name;
         }
         return $results;
