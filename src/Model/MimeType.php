@@ -12,6 +12,7 @@ namespace MLAB\FileManipulation\Model;
 class MimeType {
 
     public string $value;
+    public string $name;
 
     const cases = [
         "jpeg" => 'image/jpeg',
@@ -24,17 +25,18 @@ class MimeType {
         "svg" => 'image/svg',
     ];
 
-    private function __construct(string $value)
+    private function __construct(string $value, string $name)
     {
         $this->value = $value;
+        $this->name = $name;
     }
 
 
     public static function fromName(string $name): MimeType
     {
-        foreach (self::cases as $status) {
-            if( $name === $status->name ){
-                return new MimeType($status);
+        foreach (self::cases as $key => $status) {
+            if( $name === $key ){
+                return new MimeType($status, $key);
             }
         }
 
@@ -43,9 +45,9 @@ class MimeType {
 
     public static function fromValues(string $value): MimeType
     {
-        foreach (self::cases as $status) {
+        foreach (self::cases as $key => $status) {
             if($status == $value) {
-                return new MimeType($status);
+                return new MimeType($status, $key);
             }
         }
 
@@ -56,8 +58,8 @@ class MimeType {
     public static function values(): array
     {
         $results = [];
-        foreach (self::cases as $status) {
-            $results[] = $status->name;
+        foreach (self::cases as $key => $status) {
+            $results[] = $key;
         }
         return $results;
     }
