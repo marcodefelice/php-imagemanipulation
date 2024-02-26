@@ -10,23 +10,35 @@ namespace MLAB\FileManipulation\Model;
 
  use MLAB\FileManipulation\Exceptions\ValueError;
 
-enum FileExtension: string {
+class FileExtension {
 
-    case jpeg = '.jpeg';
-    case pjpeg = '.pjpeg';
-    case png = '.png$';
-    case gif = '.gif';
-    case tiff = '.tiff';
-    case webp = '.webp';
-    case bmp = '.bmp';
-    case svg = '.svg';
+    public string $value;
+    public string $name;
+
+    const cases = [
+        "jpeg"  => '.jpeg',
+        "pjpeg" => '.pjpeg',
+        "png"   => '.png$',
+        "gif"   => '.gif',
+        "tiff"  => '.tiff',
+        "webp"  => '.webp',
+        "bmp"   => '.bmp',
+        "svg"   => '.svg',
+    ];
+
+
+    private function __construct(string $value, string $name)
+    {
+        $this->value = $value;
+        $this->name = $name;
+    }
 
 
     public static function fromName(string $name): FileExtension
     {
-        foreach (self::cases() as $status) {
-            if( $name === $status->name ){
-                return $status;
+        foreach (self::cases as $key => $status) {
+            if( $name === $key ){
+                return new FileExtension($status, $key);
             }
         }
 
@@ -44,8 +56,8 @@ enum FileExtension: string {
     public static function values(): array
     {
         $results = [];
-        foreach (self::cases() as $status) {
-            $results[] = $status->name;
+        foreach (self::cases as $key => $status) {
+            $results[] = $key;
         }
         return $results;
     }
